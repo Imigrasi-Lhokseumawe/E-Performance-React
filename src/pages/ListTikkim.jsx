@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { getMe } from "../features/authSlice"
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { getMe } from "../features/authSlice";
 
 const ListTikkim = () => {
   const [tikkim, setTikkim] = useState([]);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const {isError} = useSelector((state => state.auth))
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isError } = useSelector((state) => state.auth);
 
-  useEffect(()=> {
-    dispatch(getMe())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
 
-  useEffect(()=> {
-    if (isError){
-      navigate("/")
+  useEffect(() => {
+    if (isError) {
+      navigate("/");
     }
-  }, [isError, navigate])
+  }, [isError, navigate]);
 
   useEffect(() => {
     getTikkim();
@@ -37,7 +37,7 @@ const ListTikkim = () => {
     await axios.delete(`http://localhost:5000/tikkim/${userId}`);
     getTikkim();
   };
-  
+
   return (
     <div>
       <main id="main" class="main">
@@ -69,7 +69,7 @@ const ListTikkim = () => {
 
                   <table class="table datatable">
                     <thead>
-                    <tr>
+                      <tr>
                         <th>
                           <b>N</b>o
                         </th>
@@ -81,7 +81,7 @@ const ListTikkim = () => {
                       </tr>
                     </thead>
                     <tbody>
-                    {tikkim.length === 0 ? (
+                      {tikkim.length === 0 ? (
                         <tr>
                           <td colSpan="6" style={{ textAlign: "center" }}>
                             Tidak terdapat data Tikkim yang tersimpan
@@ -96,12 +96,13 @@ const ListTikkim = () => {
                             <td>{tikkim.target}</td>
                             <td>{tikkim.anggaran}</td>
                             <td>
-                              <button
+                              <Link
+                                to={`/edit-tikkim/${tikkim.uuid}`}
                                 type="button"
-                                className="btn btn-primary btn-sm me-2 unprint"
+                                className="btn btn-primary btn-sm me-2"
                               >
                                 Edit
-                              </button>
+                              </Link>
                               <button
                                 type="button"
                                 className="btn btn-danger btn-sm unprint"
@@ -113,7 +114,6 @@ const ListTikkim = () => {
                           </tr>
                         ))
                       )}
-                      
                     </tbody>
                   </table>
                 </div>
@@ -123,7 +123,7 @@ const ListTikkim = () => {
         </section>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default ListTikkim
+export default ListTikkim;

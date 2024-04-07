@@ -13,6 +13,10 @@ import AddLalintalkim from './pages/AddLalintalkim';
 import AddInteldakim from './pages/AddInteldakim';
 import AddTikkim from './pages/AddTikkim';
 import AddTataUsaha from './pages/AddTataUsaha';
+import EditInteldakim from './pages/EditInteldakim';
+import EditLalintalkim from './pages/EditLalintalkim';
+import EditTikkim from './pages/EditTikkim';
+import EditTataUsaha from './pages/EditTataUsaha';
 
 function App() {
   return (
@@ -49,6 +53,13 @@ function App() {
             <AddLalintalkim />
           </>
         )} />
+        <Route path="/edit-lalintalkim/:id" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <EditLalintalkim />
+          </>
+        )} />
         <Route path="/data-seksi-inteldakim" element={(
           <>
             <Navbar />
@@ -61,6 +72,13 @@ function App() {
             <Navbar />
             <Sidebar />
             <AddInteldakim />
+          </>
+        )} />
+        <Route path="/edit-inteldakim/:id" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <EditInteldakim />
           </>
         )} />
         <Route path="/data-seksi-tikkim" element={(
@@ -77,6 +95,13 @@ function App() {
             <AddTikkim />
           </>
         )} />
+        <Route path="/edit-tikkim/:id" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <EditTikkim />
+          </>
+        )} />
         <Route path="/data-subbag-tata-usaha" element={(
           <>
             <Navbar />
@@ -89,6 +114,13 @@ function App() {
             <Navbar />
             <Sidebar />
             <AddTataUsaha />
+          </>
+        )} />
+        <Route path="/edit-tata-usaha/:id" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <EditTataUsaha />
           </>
         )} />
       </Routes>

@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
 import { LoginUser, reset } from "../features/authSlice"
 import "../styles/Kinerja.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 const Kinerja = () => {
   const [username, setUsername] = useState("")
@@ -10,6 +12,12 @@ const Kinerja = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {user, isError, isSuccess, isLoading, message} = useSelector((state) => state.auth)
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
 
   useEffect(()=>{
     if(user || isSuccess) {
@@ -29,16 +37,17 @@ const Kinerja = () => {
         <div className="container d-flex align-items-center">
           <div className="me-auto">
             <h1>
-              <img
-                className="img-logo"
-                src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Lambang_Imigrasi_Kemenkumham.svg"
-                alt=""
-              />
+              <img className="img-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Lambang_Imigrasi_Kemenkumham.svg" alt="" />
               <a href="/">IMIGRASI LHOKSEUMAWE</a>
             </h1>
           </div>
-
-          <nav id="navbar" className="navbar order-last order-lg-0">
+          {/* Tombol hamburger */}
+          <div className="mobile-nav-toggle d-lg-none">
+            <button onClick={toggleMobileMenu}>
+            <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
+            </button>
+          </div>
+          <nav id="navbar" className={`navbar order-last order-lg-0 ${isMobileMenuOpen ? 'active' : ''}`}>
             <ul>
               <li>
                 <a className="nav-link scrollto active" href="/">
@@ -46,7 +55,7 @@ const Kinerja = () => {
                 </a>
               </li>
               <li>
-                <a className="nav-link scrollto" href="/capaian-kinerja">
+                <a className="nav-link scrollto" href="/">
                   Capaian Kinerja
                 </a>
               </li>

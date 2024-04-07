@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom'
 import { getMe } from "../features/authSlice"
 
 const Dashboard = () => {
+  const [lalintalkimTotal, setLalintalkimTotal] = useState(0);
+  const [inteldakimTotal, setInteldakimTotal] = useState(0);
+  const [tikkimTotal, setTikkimTotal] = useState(0);
+  const [tataUsahaTotal, setTataUsahaTotal] = useState(0);
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const {isError} = useSelector((state => state.auth))
@@ -21,6 +25,49 @@ const Dashboard = () => {
       navigate("/")
     }
   }, [isError, navigate])
+
+  useEffect(() => {
+    getLalintalkim();
+    getInteldakim();
+    getTikkim();
+    getTataUsaha();
+  }, []);
+
+  const getLalintalkim = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/lalintalkim");
+      setLalintalkimTotal(response.data.length);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getInteldakim = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/inteldakim");
+      setInteldakimTotal(response.data.length);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getTikkim = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/tikkim");
+      setTikkimTotal(response.data.length);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getTataUsaha = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/tata-usaha");
+      setTataUsahaTotal(response.data.length);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   
   return (
     <div>
@@ -49,7 +96,7 @@ const Dashboard = () => {
                       <FontAwesomeIcon icon={faUserTie} />
                     </div>
                     <div className="ps-3">
-                      <h6>2</h6>
+                      <h6>{lalintalkimTotal}</h6>
                     </div>
                   </div>
                 </div>
@@ -66,7 +113,7 @@ const Dashboard = () => {
                       <FontAwesomeIcon icon={faUserTie} />
                     </div>
                     <div className="ps-3">
-                      <h6>2</h6>
+                      <h6>{inteldakimTotal}</h6>
                     </div>
                   </div>
                 </div>
@@ -83,7 +130,7 @@ const Dashboard = () => {
                       <FontAwesomeIcon icon={faUserTie} />
                     </div>
                     <div className="ps-3">
-                      <h6>2</h6>
+                      <h6>{tikkimTotal}</h6>
                     </div>
                   </div>
                 </div>
@@ -100,7 +147,7 @@ const Dashboard = () => {
                       <FontAwesomeIcon icon={faUserTie} />
                     </div>
                     <div className="ps-3">
-                      <h6>2</h6>
+                      <h6>{tataUsahaTotal}</h6>
                     </div>
                   </div>
                 </div>

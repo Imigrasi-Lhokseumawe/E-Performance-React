@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { Carousel } from 'react-bootstrap';
 import "../styles/Homepage.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import image1 from "../assets/img/news-1.jpg"
 import image2 from "../assets/img/news-2.jpg"
 import image3 from "../assets/img/news-3.jpg"
@@ -8,18 +10,29 @@ import capaian1 from "../assets/img/capaian-1.jpg"
 import capaian2 from "../assets/img/capaian-2.jpg"
 
 const Homepage = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <div>
       <header id="header" className="fixed-top d-flex align-items-center">
         <div className="container d-flex align-items-center">
           <div className="me-auto">
             <h1>
-            <img className="img-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Lambang_Imigrasi_Kemenkumham.svg" alt="" />
+              <img className="img-logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Lambang_Imigrasi_Kemenkumham.svg" alt="" />
               <a href="/">IMIGRASI LHOKSEUMAWE</a>
             </h1>
           </div>
-
-          <nav id="navbar" className="navbar order-last order-lg-0">
+          {/* Tombol hamburger */}
+          <div className="mobile-nav-toggle d-lg-none">
+            <button onClick={toggleMobileMenu}>
+            <FontAwesomeIcon icon={isMobileMenuOpen ? faTimes : faBars} />
+            </button>
+          </div>
+          <nav id="navbar" className={`navbar order-last order-lg-0 ${isMobileMenuOpen ? 'active' : ''}`}>
             <ul>
               <li>
                 <a className="nav-link scrollto active" href="/">
@@ -27,7 +40,7 @@ const Homepage = () => {
                 </a>
               </li>
               <li>
-                <a className="nav-link scrollto" href="/capaian-kinerja">
+                <a className="nav-link scrollto" href="/">
                   Capaian Kinerja
                 </a>
               </li>

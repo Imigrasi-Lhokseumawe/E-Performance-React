@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { getMe } from "../features/authSlice"
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import { getMe } from "../features/authSlice";
 
 const ListTataUsaha = () => {
   const [tataUsaha, setTataUsaha] = useState([]);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const {isError} = useSelector((state => state.auth))
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isError } = useSelector((state) => state.auth);
 
-  useEffect(()=> {
-    dispatch(getMe())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(getMe());
+  }, [dispatch]);
 
-  useEffect(()=> {
-    if (isError){
-      navigate("/")
+  useEffect(() => {
+    if (isError) {
+      navigate("/");
     }
-  }, [isError, navigate])
+  }, [isError, navigate]);
 
   useEffect(() => {
     getTataUsaha();
@@ -69,7 +69,7 @@ const ListTataUsaha = () => {
 
                   <table class="table datatable">
                     <thead>
-                    <tr>
+                      <tr>
                         <th>
                           <b>N</b>o
                         </th>
@@ -81,7 +81,7 @@ const ListTataUsaha = () => {
                       </tr>
                     </thead>
                     <tbody>
-                    {tataUsaha.length === 0 ? (
+                      {tataUsaha.length === 0 ? (
                         <tr>
                           <td colSpan="6" style={{ textAlign: "center" }}>
                             Tidak terdapat data Tata Usaha yang tersimpan
@@ -96,16 +96,19 @@ const ListTataUsaha = () => {
                             <td>{tataUsaha.target}</td>
                             <td>{tataUsaha.anggaran}</td>
                             <td>
-                              <button
+                              <Link
+                                to={`/edit-tata-usaha/${tataUsaha.uuid}`}
                                 type="button"
-                                className="btn btn-primary btn-sm me-2 unprint"
+                                className="btn btn-primary btn-sm me-2"
                               >
                                 Edit
-                              </button>
+                              </Link>
                               <button
                                 type="button"
                                 className="btn btn-danger btn-sm unprint"
-                                onClick={() => handleDeleteTataUsaha(tataUsaha.uuid)}
+                                onClick={() =>
+                                  handleDeleteTataUsaha(tataUsaha.uuid)
+                                }
                               >
                                 Hapus
                               </button>
@@ -113,7 +116,6 @@ const ListTataUsaha = () => {
                           </tr>
                         ))
                       )}
-                      
                     </tbody>
                   </table>
                 </div>
@@ -123,7 +125,7 @@ const ListTataUsaha = () => {
         </section>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default ListTataUsaha
+export default ListTataUsaha;

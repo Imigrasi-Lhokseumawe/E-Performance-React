@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getMe } from "../features/authSlice";
 
 const ListLalintalkim = () => {
@@ -96,12 +96,13 @@ const ListLalintalkim = () => {
                             <td>{lalintalkim.target}</td>
                             <td>{lalintalkim.anggaran}</td>
                             <td>
-                              <button
+                            <Link
+                              to={`/edit-lalintalkim/${lalintalkim.uuid}`}
                                 type="button"
-                                className="btn btn-primary btn-sm me-2 unprint"
+                                className="btn btn-primary btn-sm me-2"
                               >
                                 Edit
-                              </button>
+                              </Link>
                               <button
                                 type="button"
                                 className="btn btn-danger btn-sm unprint"

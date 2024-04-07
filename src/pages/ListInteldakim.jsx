@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { getMe } from "../features/authSlice";
 
 const ListInteldakim = () => {
@@ -96,12 +96,13 @@ const ListInteldakim = () => {
                             <td>{inteldakim.target}</td>
                             <td>{inteldakim.anggaran}</td>
                             <td>
-                              <button
+                              <Link
+                              to={`/edit-inteldakim/${inteldakim.uuid}`}
                                 type="button"
                                 className="btn btn-primary btn-sm me-2"
                               >
                                 Edit
-                              </button>
+                              </Link>
                               <button
                                 type="button"
                                 className="btn btn-danger btn-sm"
