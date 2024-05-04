@@ -8,8 +8,10 @@ import { getMe } from "../features/authSlice";
 const EditTataUsaha = () => {
   const [kegiatan, setKegiatan] = useState("");
   const [jumlah, setJumlah] = useState("");
-  const [target, setTarget] = useState("");
+  const [output, setOutput] = useState("");
   const [anggaran, setAnggaran] = useState("");
+  const [sisaAnggaran, setSisaAnggaran] = useState("");
+  const [periode, setPeriode] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { id } = useParams();
@@ -33,8 +35,10 @@ const EditTataUsaha = () => {
     const response = await axios.get(`http://localhost:5000/tata-usaha/${id}`);
     setKegiatan(response.data.kegiatan);
     setJumlah(response.data.jumlah);
-    setTarget(response.data.target);
+    setOutput(response.data.output);
     setAnggaran(response.data.anggaran);
+    setSisaAnggaran(response.data.sisaAnggaran);
+    setPeriode(response.data.periode);
   };
 
   const updateTataUsaha = async (e) => {
@@ -42,8 +46,10 @@ const EditTataUsaha = () => {
     const formData = new FormData();
     formData.append("kegiatan", kegiatan);
     formData.append("jumlah", jumlah);
-    formData.append("target", target);
+    formData.append("output", output);
     formData.append("anggaran", anggaran);
+    formData.append("sisaAnggaran", sisaAnggaran);
+    formData.append("periode", periode);
 
     const jsonData = {};
     formData.forEach((value, key) => {
@@ -86,7 +92,7 @@ const EditTataUsaha = () => {
                   <form class="row g-3" onSubmit={updateTataUsaha}>
                     <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Kegiatan
+                        Indikator Kinerja / Kegiatan
                       </label>
                       <input
                         type="text"
@@ -98,7 +104,7 @@ const EditTataUsaha = () => {
                     </div>
                     <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Jumlah
+                        Jumlah Target Kinerja
                       </label>
                       <input
                         type="text"
@@ -110,19 +116,19 @@ const EditTataUsaha = () => {
                     </div>
                     <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Target
+                        Output
                       </label>
                       <input
                         type="text"
                         class="form-control"
                         id="inputName5"
-                        value={target}
-                        onChange={(e) => setTarget(e.target.value)}
+                        value={output}
+                        onChange={(e) => setOutput(e.target.value)}
                       />
                     </div>
                     <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Anggaran
+                        Realisasi Anggaran
                       </label>
                       <input
                         type="text"
@@ -132,10 +138,34 @@ const EditTataUsaha = () => {
                         onChange={(e) => setAnggaran(e.target.value)}
                       />
                     </div>
-                    {/* Tombol Update */}
+                    <div class="col-md-6">
+                      <label for="inputName5" class="form-label">
+                        Sisa Ketersediaan Anggaran
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputName5"
+                        value={sisaAnggaran}
+                        onChange={(e) => setSisaAnggaran(e.target.value)}
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputName5" class="form-label">
+                        Periode
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputName5"
+                        value={periode}
+                        onChange={(e) => setPeriode(e.target.value)}
+                      />
+                    </div>
+                    {/* Tombol Simpan */}
                     <div className="col-12">
                       <button type="submit" className="btn btn-primary">
-                        Update
+                        Simpan
                       </button>
                     </div>
                   </form>

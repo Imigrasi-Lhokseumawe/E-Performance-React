@@ -17,6 +17,7 @@ import EditInteldakim from './pages/EditInteldakim';
 import EditLalintalkim from './pages/EditLalintalkim';
 import EditTikkim from './pages/EditTikkim';
 import EditTataUsaha from './pages/EditTataUsaha';
+import CapaianKinerja from './pages/CapaianKinerja';
 
 function App() {
   return (
@@ -25,6 +26,11 @@ function App() {
         <Route path="/" element={(
           <>
             <Homepage />
+          </>
+        )} />
+        <Route path="/capaian-kinerja" element={(
+          <>
+            <CapaianKinerja />
           </>
         )} />
         <Route path="/kinerja" element={(

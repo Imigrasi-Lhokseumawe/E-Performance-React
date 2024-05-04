@@ -55,7 +55,7 @@ const Kinerja = () => {
                 </a>
               </li>
               <li>
-                <a className="nav-link scrollto" href="/">
+                <a className="nav-link scrollto" href="/capaian-kinerja">
                   Capaian Kinerja
                 </a>
               </li>

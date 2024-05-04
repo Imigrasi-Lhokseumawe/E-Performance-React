@@ -73,10 +73,12 @@ const ListLalintalkim = () => {
                         <th>
                           <b>N</b>o
                         </th>
-                        <th>Kegiatan</th>
-                        <th>Jumlah</th>
-                        <th>Target</th>
-                        <th>Anggaran</th>
+                        <th>Indikator Kinerja/Kegiatan</th>
+                        <th>Jumlah Target Kinerja</th>
+                        <th>Output</th>
+                        <th>Realisasi Anggaran</th>
+                        <th>Sisa Ketersediaan Anggaran</th>
+                        <th>Periode</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -93,8 +95,10 @@ const ListLalintalkim = () => {
                             <td>{index + 1}</td>
                             <td>{lalintalkim.kegiatan}</td>
                             <td>{lalintalkim.jumlah}</td>
-                            <td>{lalintalkim.target}</td>
+                            <td>{lalintalkim.output}</td>
                             <td>{lalintalkim.anggaran}</td>
+                            <td>{lalintalkim.sisaAnggaran}</td>
+                            <td>{lalintalkim.periode}</td>
                             <td>
                             <Link
                               to={`/edit-lalintalkim/${lalintalkim.uuid}`}

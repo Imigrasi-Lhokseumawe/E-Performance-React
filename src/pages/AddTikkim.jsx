@@ -7,8 +7,10 @@ import { getMe } from "../features/authSlice";
 const AddTikkim = () => {
     const [kegiatan, setKegiatan] = useState("");
   const [jumlah, setJumlah] = useState("");
-  const [target, setTarget] = useState("");
+  const [output, setOutput] = useState("");
   const [anggaran, setAnggaran] = useState("");
+  const [sisaAnggaran, setSisaAnggaran] = useState("");
+  const [periode, setPeriode] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.auth);
@@ -28,8 +30,10 @@ const AddTikkim = () => {
     const formData = new FormData();
     formData.append("kegiatan", kegiatan);
     formData.append("jumlah", jumlah);
-    formData.append("target", target);
+    formData.append("output", output);
     formData.append("anggaran", anggaran);
+    formData.append("sisaAnggaran", sisaAnggaran);
+    formData.append("periode", periode);
 
     console.log(formData);
 
@@ -72,9 +76,9 @@ const AddTikkim = () => {
                 <div class="card-body">
                   <h5 class="card-title">Form Data Tikkim</h5>
                   <form class="row g-3" onSubmit={saveTikkim}>
-                  <div class="col-md-6">
+                    <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Kegiatan
+                        Indikator Kinerja / Kegiatan
                       </label>
                       <input
                         type="text"
@@ -86,7 +90,7 @@ const AddTikkim = () => {
                     </div>
                     <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Jumlah
+                        Jumlah Target Kinerja
                       </label>
                       <input
                         type="text"
@@ -98,19 +102,19 @@ const AddTikkim = () => {
                     </div>
                     <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Target
+                        Output
                       </label>
                       <input
                         type="text"
                         class="form-control"
                         id="inputName5"
-                        value={target}
-                        onChange={(e) => setTarget(e.target.value)}
+                        value={output}
+                        onChange={(e) => setOutput(e.target.value)}
                       />
                     </div>
                     <div class="col-md-6">
                       <label for="inputName5" class="form-label">
-                        Anggaran
+                        Realisasi Anggaran
                       </label>
                       <input
                         type="text"
@@ -118,6 +122,30 @@ const AddTikkim = () => {
                         id="inputName5"
                         value={anggaran}
                         onChange={(e) => setAnggaran(e.target.value)}
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputName5" class="form-label">
+                        Sisa Ketersediaan Anggaran
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputName5"
+                        value={sisaAnggaran}
+                        onChange={(e) => setSisaAnggaran(e.target.value)}
+                      />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="inputName5" class="form-label">
+                        Periode
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="inputName5"
+                        value={periode}
+                        onChange={(e) => setPeriode(e.target.value)}
                       />
                     </div>
                     {/* Tombol Simpan */}

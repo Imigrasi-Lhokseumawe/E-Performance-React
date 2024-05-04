@@ -40,7 +40,7 @@ const Homepage = () => {
                 </a>
               </li>
               <li>
-                <a className="nav-link scrollto" href="/">
+                <a className="nav-link scrollto" href="/capaian-kinerja">
                   Capaian Kinerja
                 </a>
               </li>
@@ -157,7 +157,7 @@ const Homepage = () => {
   <div class="container">
 
     <div class="section-title">
-      <h2>CAPAIAN KINERJA</h2>
+      <h2>TARGET KINERJA</h2>
     </div>
 
     <Carousel>

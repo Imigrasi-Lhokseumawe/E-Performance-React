@@ -73,10 +73,12 @@ const ListTikkim = () => {
                         <th>
                           <b>N</b>o
                         </th>
-                        <th>Kegiatan</th>
-                        <th>Jumlah</th>
-                        <th>Target</th>
-                        <th>Anggaran</th>
+                        <th>Indikator Kinerja/Kegiatan</th>
+                        <th>Jumlah Target Kinerja</th>
+                        <th>Output</th>
+                        <th>Realisasi Anggaran</th>
+                        <th>Sisa Ketersediaan Anggaran</th>
+                        <th>Periode</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -93,8 +95,10 @@ const ListTikkim = () => {
                             <td>{index + 1}</td>
                             <td>{tikkim.kegiatan}</td>
                             <td>{tikkim.jumlah}</td>
-                            <td>{tikkim.target}</td>
+                            <td>{tikkim.output}</td>
                             <td>{tikkim.anggaran}</td>
+                            <td>{tikkim.sisaAnggaran}</td>
+                            <td>{tikkim.periode}</td>
                             <td>
                               <Link
                                 to={`/edit-tikkim/${tikkim.uuid}`}

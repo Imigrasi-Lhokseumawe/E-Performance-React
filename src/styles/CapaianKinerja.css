@@ -1,0 +1,63 @@
+/*--------------------------------------------------------------
+    # Hero Capaian Section
+    --------------------------------------------------------------*/
+#hero-capaian {
+  width: 100%;
+  height: 60vh;
+  background: url("../assets/img/background-kinerja.jpeg") center center;
+  background-size: cover;
+  position: relative;
+  margin-top: 40px;
+  padding: 0;
+}
+
+#hero-capaian:before {
+  content: "";
+  background: #b9b8b8;
+  opacity: 20%;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#hero-capaian .container {
+  z-index: 2;
+}
+
+#hero-capaian h1 {
+  color: #000;
+  text-align: center;
+  font-weight: 700;
+  font-size: 54px;
+}
+
+#hero-capaian h2 {
+  color: rgba(0, 0, 0, 0.8);
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  letter-spacing: -1px;
+  margin-top: 30px;
+}
+
+@media (max-width: 992px) {
+  #hero-capaian {
+    height: calc(100vh - 70px);
+  }
+}
+
+@media (max-width: 768px) {
+  #hero-capaian h1 {
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  #hero-capaian h2 {
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 30px;
+  }
+}

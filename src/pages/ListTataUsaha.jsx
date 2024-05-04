@@ -73,10 +73,12 @@ const ListTataUsaha = () => {
                         <th>
                           <b>N</b>o
                         </th>
-                        <th>Kegiatan</th>
-                        <th>Jumlah</th>
-                        <th>Target</th>
-                        <th>Anggaran</th>
+                        <th>Indikator Kinerja/Kegiatan</th>
+                        <th>Jumlah Target Kinerja</th>
+                        <th>Output</th>
+                        <th>Realisasi Anggaran</th>
+                        <th>Sisa Ketersediaan Anggaran</th>
+                        <th>Periode</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -93,8 +95,10 @@ const ListTataUsaha = () => {
                             <td>{index + 1}</td>
                             <td>{tataUsaha.kegiatan}</td>
                             <td>{tataUsaha.jumlah}</td>
-                            <td>{tataUsaha.target}</td>
+                            <td>{tataUsaha.output}</td>
                             <td>{tataUsaha.anggaran}</td>
+                            <td>{tataUsaha.sisaAnggaran}</td>
+                            <td>{tataUsaha.periode}</td>
                             <td>
                               <Link
                                 to={`/edit-tata-usaha/${tataUsaha.uuid}`}
