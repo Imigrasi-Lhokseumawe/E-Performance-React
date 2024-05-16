@@ -18,6 +18,9 @@ import EditLalintalkim from './pages/EditLalintalkim';
 import EditTikkim from './pages/EditTikkim';
 import EditTataUsaha from './pages/EditTataUsaha';
 import CapaianKinerja from './pages/CapaianKinerja';
+import ListUsers from './pages/ListUsers';
+import AddUsers from './pages/AddUsers';
+import EditUsers from './pages/EditUsers';
 
 function App() {
   return (
@@ -43,6 +46,27 @@ function App() {
             <Navbar />
             <Sidebar />
             <Dashboard />
+          </>
+        )} />
+        <Route path="/data-users" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <ListUsers />
+          </>
+        )} />
+        <Route path="/add-users" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <AddUsers />
+          </>
+        )} />
+        <Route path="/edit-users/:id" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <EditUsers />
           </>
         )} />
         <Route path="/data-seksi-lalintalkim" element={(

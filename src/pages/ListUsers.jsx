@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { getMe } from "../features/authSlice";
 
-const ListInteldakim = () => {
-  const [inteldakim, setInteldakim] = useState([]);
+const ListUsers = () => {
+  const [users, setUsers] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError, user } = useSelector((state) => state.auth);
+  const { isError } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getMe());
@@ -21,41 +21,41 @@ const ListInteldakim = () => {
   }, [isError, navigate]);
 
   useEffect(() => {
-    getInteldakim();
+    getUsers();
   }, []);
 
-  const getInteldakim = async () => {
+  const getUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/inteldakim");
-      setInteldakim(response.data);
+      const response = await axios.get("http://localhost:5000/users");
+      setUsers(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
-  const handleDeleteInteldakim = async (userId) => {
-    await axios.delete(`http://localhost:5000/inteldakim/${userId}`);
-    getInteldakim();
+  const handleDeleteUsers = async (userId) => {
+    await axios.delete(`http://localhost:5000/users/${userId}`);
+    getUsers();
   };
 
   return (
     <div>
-      <main id="main" class="main">
+      <main id="main" className="main">
         <div class="pagetitle">
-          <h1>Data Table Seksi Inteldakim</h1>
+          <h1>Data Table Users</h1>
           <nav>
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
                 <a href="index.html">Home</a>
               </li>
               <li class="breadcrumb-item">Tables</li>
-              <li class="breadcrumb-item active">Data Seksi Inteldakim</li>
+              <li class="breadcrumb-item active">Data Users</li>
             </ol>
           </nav>
         </div>
 
         <div className="pagetitle">
-          <a className="btn btn-success" href="/add-inteldakim">
+          <a className="btn btn-success" href="/add-users">
             Tambah
           </a>
         </div>
@@ -65,7 +65,7 @@ const ListInteldakim = () => {
             <div class="col-lg-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Data Seksi Inteldakim</h5>
+                  <h5 class="card-title">Data Seksi Tikkim</h5>
 
                   <table class="table datatable">
                     <thead>
@@ -73,35 +73,29 @@ const ListInteldakim = () => {
                         <th>
                           <b>N</b>o
                         </th>
-                        <th>Indikator Kinerja/Kegiatan</th>
-                        <th>Jumlah Target Kinerja</th>
-                        <th>Output</th>
-                        <th>Realisasi Anggaran</th>
-                        <th>Sisa Ketersediaan Anggaran</th>
-                        <th>Periode</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {inteldakim.length === 0 ? (
+                      {users.length === 0 ? (
                         <tr>
                           <td colSpan="6" style={{ textAlign: "center" }}>
-                            Tidak terdapat data Inteldakim yang tersimpan
+                            Tidak terdapat data Users yang tersimpan
                           </td>
                         </tr>
                       ) : (
-                        inteldakim.map((inteldakim, index) => (
-                          <tr key={inteldakim.id}>
+                        users.map((users, index) => (
+                          <tr key={users.id}>
                             <td>{index + 1}</td>
-                            <td>{inteldakim.kegiatan}</td>
-                            <td>{inteldakim.jumlah}</td>
-                            <td>{inteldakim.output}</td>
-                            <td>{inteldakim.anggaran}</td>
-                            <td>{inteldakim.sisaAnggaran}</td>
-                            <td>{inteldakim.periode}</td>
+                            <td>{users.username}</td>
+                            <td>{users.email}</td>
+                            <td>{users.role}</td>
                             <td>
                               <Link
-                                to={`/edit-inteldakim/${inteldakim.uuid}`}
+                                to={`/edit-users/${users.uuid}`}
                                 type="button"
                                 className="btn btn-primary btn-sm me-2"
                               >
@@ -109,24 +103,11 @@ const ListInteldakim = () => {
                               </Link>
                               <button
                                 type="button"
-                                className="btn btn-danger btn-sm me-2"
-                                onClick={() =>
-                                  handleDeleteInteldakim(inteldakim.uuid)
-                                }
+                                className="btn btn-danger btn-sm"
+                                onClick={() => handleDeleteUsers(users.uuid)}
                               >
                                 Hapus
                               </button>
-                              {user && user.role === "admin" && (
-                                <button
-                                  type="button"
-                                  className="btn btn-success btn-sm"
-                                  onClick={() =>
-                                    handleDeleteInteldakim(inteldakim.uuid)
-                                  }
-                                >
-                                  Approve
-                                </button>
-                              )}
                             </td>
                           </tr>
                         ))
@@ -143,4 +124,4 @@ const ListInteldakim = () => {
   );
 };
 
-export default ListInteldakim;
+export default ListUsers;

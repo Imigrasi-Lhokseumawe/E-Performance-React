@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import "../assets/css/style.css";
 
 const Sidebar = () => {
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <div>
       <aside id="sidebar" className="sidebar">
@@ -35,6 +38,13 @@ const Sidebar = () => {
               <span>Data Subbag Tata Usaha</span>
             </a>
           </li>
+          {user && user.role === "admin" && (
+          <li className="nav-item">
+            <a className="nav-link collapsed" href="/data-users">
+              <span>Data Users</span>
+            </a>
+          </li>
+          )}
         </ul>
       </aside>
     </div>
