@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { getMe } from "../features/authSlice";
@@ -116,15 +118,13 @@ const ListInteldakim = () => {
                               >
                                 Hapus
                               </button>
+                              
                               {user && user.role === "admin" && (
                                 <button
                                   type="button"
                                   className="btn btn-success btn-sm"
-                                  onClick={() =>
-                                    handleDeleteInteldakim(inteldakim.uuid)
-                                  }
                                 >
-                                  Approve
+                                  <FontAwesomeIcon icon={faCheck} />
                                 </button>
                               )}
                             </td>

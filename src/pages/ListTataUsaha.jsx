@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { getMe } from "../features/authSlice";
@@ -8,7 +10,7 @@ const ListTataUsaha = () => {
   const [tataUsaha, setTataUsaha] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isError } = useSelector((state) => state.auth);
+  const { isError, user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getMe());
@@ -109,13 +111,22 @@ const ListTataUsaha = () => {
                               </Link>
                               <button
                                 type="button"
-                                className="btn btn-danger btn-sm unprint"
+                                className="btn btn-danger btn-sm me-2"
                                 onClick={() =>
                                   handleDeleteTataUsaha(tataUsaha.uuid)
                                 }
                               >
                                 Hapus
                               </button>
+
+                              {user && user.role === "admin" && (
+                                <button
+                                  type="button"
+                                  className="btn btn-success btn-sm"
+                                >
+                                  <FontAwesomeIcon icon={faCheck} />
+                                </button>
+                              )}
                             </td>
                           </tr>
                         ))
