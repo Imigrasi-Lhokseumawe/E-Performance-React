@@ -11,6 +11,7 @@ const AddTikkim = () => {
   const [anggaran, setAnggaran] = useState("");
   const [sisaAnggaran, setSisaAnggaran] = useState("");
   const [periode, setPeriode] = useState("");
+  const [tanggal, setTanggal] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.auth);
@@ -34,6 +35,7 @@ const AddTikkim = () => {
     formData.append("anggaran", anggaran);
     formData.append("sisaAnggaran", sisaAnggaran);
     formData.append("periode", periode);
+    formData.append("tanggal", tanggal);
 
     console.log(formData);
 
@@ -52,6 +54,22 @@ const AddTikkim = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Fungsi untuk memformat angka sebagai mata uang
+  const formatCurrency = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    })
+      .format(number)
+      .replace(/\D00(?=\D*$)/, "");
+  };
+
+  // Fungsi untuk menghapus format mata uang dan mengembalikan angka
+  const parseCurrency = (value) => {
+    return value.replace(/[Rp.,\s]/g, "");
   };
 
   return (
@@ -120,8 +138,13 @@ const AddTikkim = () => {
                         type="text"
                         class="form-control"
                         id="inputName5"
-                        value={anggaran}
-                        onChange={(e) => setAnggaran(e.target.value)}
+                        value={formatCurrency(anggaran)}
+                        onChange={(e) =>
+                          setAnggaran(parseCurrency(e.target.value))
+                        }
+                        onBlur={(e) =>
+                          setAnggaran(parseCurrency(e.target.value))
+                        }
                       />
                     </div>
                     <div class="col-md-6">
@@ -132,11 +155,16 @@ const AddTikkim = () => {
                         type="text"
                         class="form-control"
                         id="inputName5"
-                        value={sisaAnggaran}
-                        onChange={(e) => setSisaAnggaran(e.target.value)}
+                        value={formatCurrency(sisaAnggaran)}
+                        onChange={(e) =>
+                          setSisaAnggaran(parseCurrency(e.target.value))
+                        }
+                        onBlur={(e) =>
+                          setSisaAnggaran(parseCurrency(e.target.value))
+                        }
                       />
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                       <label for="inputName5" class="form-label">
                         Periode
                       </label>
@@ -146,6 +174,18 @@ const AddTikkim = () => {
                         id="inputName5"
                         value={periode}
                         onChange={(e) => setPeriode(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-3">
+                    <label htmlFor="inputTanggal" className="form-label">
+                        Tanggal
+                      </label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        id="inputTanggal"
+                        value={tanggal}
+                        onChange={(e) => setTanggal(e.target.value)}
                       />
                     </div>
                     {/* Tombol Simpan */}

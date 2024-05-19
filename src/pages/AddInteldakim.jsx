@@ -11,6 +11,7 @@ const AddInteldakim = () => {
   const [anggaran, setAnggaran] = useState("");
   const [sisaAnggaran, setSisaAnggaran] = useState("");
   const [periode, setPeriode] = useState("");
+  const [tanggal, setTanggal] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { isError } = useSelector((state) => state.auth);
@@ -34,6 +35,7 @@ const AddInteldakim = () => {
     formData.append("anggaran", anggaran);
     formData.append("sisaAnggaran", sisaAnggaran);
     formData.append("periode", periode);
+    formData.append("tanggal", tanggal);
 
     console.log(formData);
 
@@ -52,6 +54,22 @@ const AddInteldakim = () => {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // Fungsi untuk memformat angka sebagai mata uang
+  const formatCurrency = (number) => {
+    return new Intl.NumberFormat("id-ID", {
+      style: "currency",
+      currency: "IDR",
+      minimumFractionDigits: 0,
+    })
+      .format(number)
+      .replace(/\D00(?=\D*$)/, "");
+  };
+
+  // Fungsi untuk menghapus format mata uang dan mengembalikan angka
+  const parseCurrency = (value) => {
+    return value.replace(/[Rp.,\s]/g, "");
   };
 
   return (
@@ -75,77 +93,99 @@ const AddInteldakim = () => {
               <div class="card">
                 <div class="card-body">
                   <h5 class="card-title">Form Data Inteldakim</h5>
-                  <form class="row g-3" onSubmit={saveInteldakim}>
-                    <div class="col-md-6">
-                      <label for="inputName5" class="form-label">
+                  <form className="row g-3" onSubmit={saveInteldakim}>
+                    <div className="col-md-6">
+                      <label htmlFor="inputName5" className="form-label">
                         Indikator Kinerja / Kegiatan
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="inputName5"
                         value={kegiatan}
                         onChange={(e) => setKegiatan(e.target.value)}
                       />
                     </div>
-                    <div class="col-md-6">
-                      <label for="inputName5" class="form-label">
+                    <div className="col-md-6">
+                      <label htmlFor="inputName5" className="form-label">
                         Jumlah Target Kinerja
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="inputName5"
                         value={jumlah}
                         onChange={(e) => setJumlah(e.target.value)}
                       />
                     </div>
-                    <div class="col-md-6">
-                      <label for="inputName5" class="form-label">
+                    <div className="col-md-6">
+                      <label htmlFor="inputName5" className="form-label">
                         Output
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="inputName5"
                         value={output}
                         onChange={(e) => setOutput(e.target.value)}
                       />
                     </div>
-                    <div class="col-md-6">
-                      <label for="inputName5" class="form-label">
+                    <div className="col-md-6">
+                      <label htmlFor="inputName5" className="form-label">
                         Realisasi Anggaran
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="inputName5"
-                        value={anggaran}
-                        onChange={(e) => setAnggaran(e.target.value)}
+                        value={formatCurrency(anggaran)}
+                        onChange={(e) =>
+                          setAnggaran(parseCurrency(e.target.value))
+                        }
+                        onBlur={(e) =>
+                          setAnggaran(parseCurrency(e.target.value))
+                        }
                       />
                     </div>
-                    <div class="col-md-6">
-                      <label for="inputName5" class="form-label">
+                    <div className="col-md-6">
+                      <label htmlFor="inputName5" className="form-label">
                         Sisa Ketersediaan Anggaran
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="inputName5"
-                        value={sisaAnggaran}
-                        onChange={(e) => setSisaAnggaran(e.target.value)}
+                        value={formatCurrency(sisaAnggaran)}
+                        onChange={(e) =>
+                          setSisaAnggaran(parseCurrency(e.target.value))
+                        }
+                        onBlur={(e) =>
+                          setSisaAnggaran(parseCurrency(e.target.value))
+                        }
                       />
                     </div>
-                    <div class="col-md-6">
-                      <label for="inputName5" class="form-label">
+                    <div className="col-md-3">
+                      <label htmlFor="inputName5" className="form-label">
                         Periode
                       </label>
                       <input
                         type="text"
-                        class="form-control"
+                        className="form-control"
                         id="inputName5"
                         value={periode}
                         onChange={(e) => setPeriode(e.target.value)}
+                      />
+                    </div>
+                    <div className="col-md-3">
+                      <label htmlFor="inputTanggal" className="form-label">
+                        Tanggal
+                      </label>
+                      <input
+                        type="date"
+                        className="form-control"
+                        id="inputTanggal"
+                        value={tanggal}
+                        onChange={(e) => setTanggal(e.target.value)}
                       />
                     </div>
                     {/* Tombol Simpan */}

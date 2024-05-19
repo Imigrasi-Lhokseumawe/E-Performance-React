@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
 import { getMe } from "../features/authSlice";
@@ -40,6 +40,31 @@ const ListLalintalkim = () => {
     getLalintalkim();
   };
 
+  const handleAccept = async (e, userId) => {
+    e.preventDefault();
+    console.log("ID:", userId);
+    const jsonData = { isAccept: true };
+    try {
+      await axios.patch(`http://localhost:5000/lalintalkim/${userId}`, jsonData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Fungsi untuk memformat angka sebagai mata uang IDR
+  const formatCurrency = (number) => {
+    return new Intl.NumberFormat('id-ID', {
+      style: 'currency',
+      currency: 'IDR',
+      minimumFractionDigits: 0,
+    }).format(number);
+  };
+
   return (
     <div>
       <main id="main" class="main">
@@ -75,13 +100,14 @@ const ListLalintalkim = () => {
                         <th>
                           <b>N</b>o
                         </th>
-                        <th>Indikator Kinerja/Kegiatan</th>
-                        <th>Jumlah Target Kinerja</th>
-                        <th>Output</th>
-                        <th>Realisasi Anggaran</th>
-                        <th>Sisa Ketersediaan Anggaran</th>
-                        <th>Periode</th>
-                        <th>Action</th>
+                        <th style={{ textAlign: 'center' }}>Kinerja/Kegiatan</th>
+                        <th style={{ textAlign: 'center' }}>Jumlah Target Kinerja</th>
+                        <th style={{ textAlign: 'center' }}>Output</th>
+                        <th style={{ textAlign: 'center' }}>Realisasi Anggaran</th>
+                        <th style={{ textAlign: 'center' }}>Sisa Ketersediaan Anggaran</th>
+                        <th style={{ textAlign: 'center' }}>Periode</th>
+                        <th style={{ textAlign: 'center' }}>Status</th>
+                        <th style={{ textAlign: 'center' }}>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -94,14 +120,21 @@ const ListLalintalkim = () => {
                       ) : (
                         lalintalkim.map((lalintalkim, index) => (
                           <tr key={lalintalkim.id}>
-                            <td>{index + 1}</td>
-                            <td>{lalintalkim.kegiatan}</td>
-                            <td>{lalintalkim.jumlah}</td>
-                            <td>{lalintalkim.output}</td>
-                            <td>{lalintalkim.anggaran}</td>
-                            <td>{lalintalkim.sisaAnggaran}</td>
-                            <td>{lalintalkim.periode}</td>
-                            <td>
+                            <td style={{ textAlign: 'center' }}>{index + 1}</td>
+                            <td style={{ textAlign: 'center' }}>{lalintalkim.kegiatan}</td>
+                            <td style={{ textAlign: 'center' }}>{lalintalkim.jumlah}</td>
+                            <td style={{ textAlign: 'center' }}>{lalintalkim.output}</td>
+                            <td style={{ textAlign: 'center' }}>{formatCurrency(lalintalkim.anggaran)}</td>
+                            <td style={{ textAlign: 'center' }}>{formatCurrency(lalintalkim.sisaAnggaran)}</td>
+                            <td style={{ textAlign: 'center' }}>{lalintalkim.periode}</td>
+                            <td style={{ textAlign: 'center' }}>
+                            {lalintalkim.isAccept ? (
+                                <FontAwesomeIcon icon={faCheck} style={{ color: "green" }} />
+                              ) : (
+                                <FontAwesomeIcon icon={faTimes} style={{ color: "red" }} />
+                              )}
+                            </td>
+                            <td style={{ textAlign: 'right' }}>
                             <Link
                               to={`/edit-lalintalkim/${lalintalkim.uuid}`}
                                 type="button"
@@ -117,10 +150,11 @@ const ListLalintalkim = () => {
                                 Hapus
                               </button>
 
-                              {user && user.role === "admin" && (
+                              {user && user.role === "admin" && !lalintalkim.isAccept && (
                                 <button
                                   type="button"
                                   className="btn btn-success btn-sm"
+                                  onClick={(e) => handleAccept(e, lalintalkim.uuid)}
                                 >
                                   <FontAwesomeIcon icon={faCheck} />
                                 </button>

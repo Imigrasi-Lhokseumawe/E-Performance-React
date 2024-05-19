@@ -17,25 +17,25 @@ const Sidebar = () => {
 
           <li className="nav-item">
             <a className="nav-link collapsed" href="/data-seksi-lalintalkim">
-              <span>Data Lalintalkim</span>
+              <span>Lalintalkim</span>
             </a>
           </li>
 
           <li className="nav-item">
             <a className="nav-link collapsed" href="/data-seksi-inteldakim">
-              <span>Data Inteldakim</span>
+              <span>Inteldakim</span>
             </a>
           </li>
 
           <li className="nav-item">
             <a className="nav-link collapsed" href="/data-seksi-tikkim">
-              <span>Data Tikkim</span>
+              <span>Tikkim</span>
             </a>
           </li>
 
           <li className="nav-item">
             <a className="nav-link collapsed" href="/data-subbag-tata-usaha">
-              <span>Data Subbag Tata Usaha</span>
+              <span>Subbag Tata Usaha</span>
             </a>
           </li>
           {user && user.role === "admin" && (
