@@ -100,7 +100,7 @@ const ListInteldakim = () => {
                         <th>
                           <b>N</b>o
                         </th>
-                        <th style={{ textAlign: 'center' }}>Kinerja/Kegiatan</th>
+                        <th style={{ textAlign: 'center' }}>Kinerja</th>
                         <th style={{ textAlign: 'center' }}>Jumlah Target Kinerja</th>
                         <th style={{ textAlign: 'center' }}>Output</th>
                         <th style={{ textAlign: 'center' }}>Realisasi Anggaran</th>
@@ -120,13 +120,13 @@ const ListInteldakim = () => {
                       ) : (
                         inteldakim.map((inteldakim, index) => (
                           <tr key={inteldakim.id}>
-                            <td>{index + 1}</td>
-                            <td>{inteldakim.kegiatan}</td>
-                            <td>{inteldakim.jumlah}</td>
-                            <td>{inteldakim.output}</td>
+                            <td style={{ textAlign: 'center' }}>{index + 1}</td>
+                            <td style={{ textAlign: 'center' }}>{inteldakim.kegiatan}</td>
+                            <td style={{ textAlign: 'center' }}>{inteldakim.jumlah}</td>
+                            <td style={{ textAlign: 'center' }}>{inteldakim.output}</td>
                             <td style={{ textAlign: 'center' }}>{formatCurrency(inteldakim.anggaran)}</td>
                             <td style={{ textAlign: 'center' }}>{formatCurrency(inteldakim.sisaAnggaran)}</td>
-                            <td>{inteldakim.periode}</td>
+                            <td style={{ textAlign: 'center' }}>{inteldakim.periode}</td>
                             <td style={{ textAlign: 'center' }}>
                             {inteldakim.isAccept ? (
                                 <FontAwesomeIcon icon={faCheck} style={{ color: "green" }} />
@@ -144,7 +144,7 @@ const ListInteldakim = () => {
                               </Link>
                               <button
                                 type="button"
-                                className="btn btn-danger btn-sm me-2"
+                                className="btn btn-danger btn-sm me-1"
                                 onClick={() =>
                                   handleDeleteInteldakim(inteldakim.uuid)
                                 }

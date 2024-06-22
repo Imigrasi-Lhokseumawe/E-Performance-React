@@ -317,7 +317,6 @@ const Dashboard = () => {
               </div>
             </div>
           </div>
-          Status Inteldakim
           <h4>Inteldakim</h4>
           <div className="row">
             <div className="col-12">

@@ -39,11 +39,18 @@ const Sidebar = () => {
             </a>
           </li>
           {user && user.role === "admin" && (
-          <li className="nav-item">
-            <a className="nav-link collapsed" href="/data-users">
-              <span>Data Users</span>
-            </a>
-          </li>
+            <>
+              <li className="nav-item">
+                <a className="nav-link collapsed" href="/data-users">
+                  <span>Data Users</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link collapsed" href="/cetak-laporan">
+                  <span>Cetak Laporan</span>
+                </a>
+              </li>
+            </>
           )}
         </ul>
       </aside>

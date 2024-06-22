@@ -100,7 +100,7 @@ const ListTataUsaha = () => {
                         <th>
                           <b>N</b>o
                         </th>
-                        <th style={{ textAlign: 'center' }}>Kinerja/Kegiatan</th>
+                        <th style={{ textAlign: 'center' }}>Kinerja</th>
                         <th style={{ textAlign: 'center' }}>Jumlah Target Kinerja</th>
                         <th style={{ textAlign: 'center' }}>Output</th>
                         <th style={{ textAlign: 'center' }}>Realisasi Anggaran</th>
@@ -144,7 +144,7 @@ const ListTataUsaha = () => {
                               </Link>
                               <button
                                 type="button"
-                                className="btn btn-danger btn-sm me-2"
+                                className="btn btn-danger btn-sm me-1"
                                 onClick={() =>
                                   handleDeleteTataUsaha(tataUsaha.uuid)
                                 }

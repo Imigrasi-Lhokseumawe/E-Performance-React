@@ -1,0 +1,13 @@
+@media print {
+  /* Sembunyikan elemen-elemen yang tidak ingin dicetak */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Tampilkan hanya bagian yang ingin dicetak */
+  .printable,
+  .printable * {
+    visibility: visible;
+    position: relative;
+  }
+}

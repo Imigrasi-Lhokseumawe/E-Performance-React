@@ -21,6 +21,8 @@ import CapaianKinerja from './pages/CapaianKinerja';
 import ListUsers from './pages/ListUsers';
 import AddUsers from './pages/AddUsers';
 import EditUsers from './pages/EditUsers';
+import CetakLaporan from './pages/CetakLaporan';
+import CetakLaporanPage from './pages/CetakLaporanPage';
 
 function App() {
   return (
@@ -152,6 +154,16 @@ function App() {
             <Sidebar />
             <EditTataUsaha />
           </>
+        )} />
+        <Route path="/cetak-laporan" element={(
+          <>
+            <Navbar />
+            <Sidebar />
+            <CetakLaporan />
+          </>
+        )} />
+        <Route path="/cetak-laporan-page" element={(
+            <CetakLaporanPage />
         )} />
       </Routes>
     </BrowserRouter>
